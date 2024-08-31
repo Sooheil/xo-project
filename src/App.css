@@ -1,0 +1,46 @@
+.gameContainer {
+  box-shadow: 1px 1px 10px white;
+  width: 300px;
+  height: 300px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+.gameContainer > div {
+  border: 1px solid white;
+  width: 32.6%;
+  position: relative;
+}
+.gameContainer > div:hover {
+  background-color: rgba(255, 255, 255, 0.235);
+  cursor: pointer;
+}
+.x::after,
+.o::after {
+  position: absolute;
+  font-size: 5em;
+  top: -20px;
+  left: 25px;
+  text-shadow: 1px 1px 0.5px white;
+}
+.o::after {
+  content: 'o';
+  color: rgb(2, 2, 125);
+}
+
+.x::after {
+  content: 'x';
+  color: rgb(2, 125, 35);
+}
+
+.gameFinished {
+  animation: blink 1s alternate 0s infinite;
+}
+@keyframes blink {
+  from {
+    opacity: 0%;
+  }
+  to {
+    opacity: 100%;
+  }
+}

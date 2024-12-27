@@ -1,11 +1,11 @@
 import './App.css';
 import { Box } from '@mui/material';
-import userBrain from './hooks/userBrain';
+import useBrain from './hooks/userBrain';
 import { xoActionType } from './types/xoAxionType';
 import { useRef, useState } from 'react';
 
 function App() {
-  const { check } = userBrain();
+  const { check } = useBrain();
   const [isFirstPlayer, setIsFirstPlayer] = useState<boolean>(true);
   const [xoMatrix, setXOMatrix] = useState<string[][]>([
     ['', '', ''],
@@ -24,7 +24,7 @@ function App() {
   ) => {
     if (isWon) return;
     if (e.classList.contains('o') || e.classList.contains('x')) return;
-    let result: boolean = false;
+    let result: number[][] | null = [];
     const newMatrix = xoMatrix;
     newMatrix[rowNumber][columnNumber] = isFirstPlayer ? 'o' : 'x';
     setXOMatrix(newMatrix);
@@ -38,8 +38,11 @@ function App() {
         xoMatrix
       );
       setIsFirstPlayer((prev) => !prev);
-      if (result) {
+      if (result?.length === 3) {
         setIsWon(true);
+        document.getElementById(`[${result[0]}]`)?.classList.add('wonCell');
+        document.getElementById(`[${result[1]}]`)?.classList.add('wonCell');
+        document.getElementById(`[${result[2]}]`)?.classList.add('wonCell');
         if (titleH1.current)
           titleH1.current.innerHTML = `player ${
             isFirstPlayer ? '1' : '2'
@@ -67,6 +70,7 @@ function App() {
         {xoMatrix.map((i, iIndex) =>
           i.map((_j, jIndex) => (
             <Box
+              id={`[${iIndex},${jIndex}]`}
               key={`${iIndex}${jIndex}`}
               onClick={(e) =>
                 handleBoxSelect(e.target as Element, iIndex, jIndex)

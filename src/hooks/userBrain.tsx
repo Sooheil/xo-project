@@ -1,75 +1,77 @@
 import { xoActionType } from '../types/xoAxionType';
 
-const userBrain = () => {
+const useBrain = () => {
   const check = (
     rowNumber: number,
     columnNumber: number,
     actionType: xoActionType,
     xoMatrix: string[][]
-  ) => {
-    let result = checkRow(rowNumber, columnNumber, actionType, xoMatrix);
+  ): number[][] | null => {
+    let result = checkRow(rowNumber, actionType, xoMatrix);
     if (result) return result;
+
     if (rowNumber + columnNumber + 1 === 3 || rowNumber === columnNumber) {
-      result = checkDimentional(rowNumber, columnNumber, actionType, xoMatrix);
+      result = checkDimentional(actionType, xoMatrix);
       if (result) return result;
     }
-    result = checkColumn(rowNumber, columnNumber, actionType, xoMatrix);
+
+    result = checkColumn(columnNumber, actionType, xoMatrix);
     return result;
   };
+
   const checkRow = (
     rowNumber: number,
-    columnNumber: number,
     actionType: xoActionType,
     xoMatrix: string[][]
-  ) => {
-    xoMatrix[rowNumber][columnNumber] = actionType.toString();
-    let actionCount: number = 0;
+  ): number[][] | null => {
+    const actionPositions: number[][] = [];
     for (let j = 0; j < 3; j++) {
-      if (xoMatrix[rowNumber][j] == actionType) {
-        actionCount++;
+      if (xoMatrix[rowNumber][j] === actionType) {
+        actionPositions.push([rowNumber, j]);
       }
     }
-    return actionCount === 3;
+    return actionPositions.length === 3 ? actionPositions : null;
   };
+
   const checkColumn = (
-    rowNumber: number,
     columnNumber: number,
     actionType: xoActionType,
     xoMatrix: string[][]
-  ) => {
-    xoMatrix[rowNumber][columnNumber] = actionType.toString();
-    let actionCount: number = 0;
-    for (let i = 0; i < 3; i++)
-      if (xoMatrix[i][columnNumber] == actionType) actionCount++;
-    return actionCount === 3;
-  };
-  const checkDimentional = (
-    rowNumber: number,
-    columnNumber: number,
-    actionType: xoActionType,
-    xoMatrix: string[][]
-  ) => {
-    let actionCount: number = 0;
-    if (rowNumber === columnNumber)
-      for (let i = 0; i < 3; i++)
-        if (xoMatrix[i][i] == actionType) {
-          actionCount++;
-          if (actionCount === 3) return true;
-        }
-    actionCount = 0;
+  ): number[][] | null => {
+    const actionPositions: number[][] = [];
     for (let i = 0; i < 3; i++) {
-      for (let j = 0; j < 3; j++) {
-        if (i + j + 1 === 3) {
-          if (xoMatrix[i][j] == actionType) {
-            actionCount++;
-            if (actionCount === 3) return true;
-          }
-        }
+      if (xoMatrix[i][columnNumber] === actionType) {
+        actionPositions.push([i, columnNumber]);
       }
     }
-    return false;
+    return actionPositions.length === 3 ? actionPositions : null;
   };
+
+  const checkDimentional = (
+    actionType: xoActionType,
+    xoMatrix: string[][]
+  ): number[][] | null => {
+    let actionPositions: number[][] = [];
+
+    // Check main diagonal
+    for (let i = 0; i < 3; i++) {
+      if (xoMatrix[i][i] === actionType) {
+        actionPositions.push([i, i]);
+      }
+    }
+    if (actionPositions.length === 3) return actionPositions;
+
+    // Check anti-diagonal
+    actionPositions = [];
+    for (let i = 0; i < 3; i++) {
+      if (xoMatrix[i][2 - i] === actionType) {
+        actionPositions.push([i, 2 - i]);
+      }
+    }
+    return actionPositions.length === 3 ? actionPositions : null;
+  };
+
   return { check };
 };
 
-export default userBrain;
+export default useBrain;

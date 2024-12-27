@@ -36,6 +36,9 @@
 .gameFinished {
   animation: blink 1s alternate 0s infinite;
 }
+.wonCell {
+  background: rgb(233, 86, 42) !important;
+}
 @keyframes blink {
   from {
     opacity: 0%;

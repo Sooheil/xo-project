@@ -1,6 +1,8 @@
 # React + TypeScript + Vite Game Project 🎮
 
-Welcome to the React + TypeScript + Vite game project! 🚀 This repository is the perfect starting point for building dynamic, high-performance web applications with React, TypeScript, and Vite. We've also included ESLint configuration to ensure your code remains clean, consistent, and production-ready. 💻✨
+Welcome to the React + TypeScript + Vite game project! 
+
+🚀 This repository is the perfect starting point for building dynamic, high-performance web applications with React, TypeScript, and Vite. We've also included ESLint configuration to ensure your code remains clean, consistent, and production-ready. 💻✨
 
 # Features 🌟
 Blazing Fast Development: Powered by Vite, experience lightning-fast HMR (Hot Module Replacement) for an unparalleled development experience.
@@ -8,9 +10,9 @@ React with TypeScript: Write robust and type-safe code with TypeScript, while le
 Configurable ESLint Rules: Ensure high-quality code with extensible ESLint configurations, including options for type-aware linting.
 Choose Your Compiler:
 
-@vitejs/plugin-react: Utilizes Babel for fast refresh.
+**@vitejs/plugin-react: Utilizes Babel for fast refresh.**
 
-@vitejs/plugin-react-swc: Leverages SWC for enhanced performance.
+**@vitejs/plugin-react-swc: Leverages SWC for enhanced performance.**
 
 # Optimized ESLint Setup 🛠️
 For production-grade applications, we recommend enabling type-aware lint rules. Here's how you can extend the default configuration:

@@ -84,5 +84,6 @@ npm run dev
 Start building your React-powered game! 🎮
 
 Feel free to contribute, suggest improvements, or report issues. Let's build something amazing together! 🌟
+
 Happy Coding! 💻🎉
 
